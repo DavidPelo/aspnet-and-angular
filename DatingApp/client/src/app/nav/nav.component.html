@@ -1,0 +1,70 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container-fluid">
+    <div class="container">
+      <a class="navbar-brand" href="#">Dating App</a>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="#"
+            *ngIf="accountService.currentUser$ | async"
+            >Matches</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="#"
+            *ngIf="accountService.currentUser$ | async"
+            >Lists</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="#"
+            *ngIf="accountService.currentUser$ | async"
+            >Messages</a
+          >
+        </li>
+      </ul>
+      <div
+        class="dropdown"
+        *ngIf="accountService.currentUser$ | async"
+        dropdown
+      >
+        <a class="dropdown-toggle text-light" dropdownToggle>Welcome User</a>
+        <div class="dropdown-menu mt-2" *dropdownMenu>
+          <a class="dropdown-item">Edit Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
+      </div>
+      <form
+        class="d-flex"
+        #loginForm="ngForm"
+        (ngSubmit)="login()"
+        autocomplete="off"
+        *ngIf="(accountService.currentUser$ | async) === null"
+      >
+        <input
+          class="form-control me-2"
+          type="text"
+          placeholder="Username"
+          name="username"
+          [(ngModel)]="model.username"
+        />
+        <input
+          class="form-control me-2 ml-2"
+          type="password"
+          placeholder="Password"
+          name="password"
+          [(ngModel)]="model.password"
+        />
+        <button class="btn btn-outline-success ml-2" type="submit">
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+</nav>
